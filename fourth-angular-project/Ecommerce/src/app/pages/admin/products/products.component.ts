@@ -9,7 +9,7 @@ import { ProductService } from '../../../services/product/product.service';
   imports: [CommonModule, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
-})
+}) 
 export class ProductsComponent implements OnInit {
   isSidePanelVisible: boolean= false;
   productObj: any ={
@@ -25,19 +25,53 @@ export class ProductsComponent implements OnInit {
     "productImageUrl": ""
   };
   categoryList: any [] = [];
+  productsList: any [] = [];
 
   constructor(private productSrv: ProductService){
 
   }
   ngOnInit(): void {
+    this.getProducts();
     this.getAllCategory();
   }
 
+  getProducts() {
+    this.productSrv.getProducts().subscribe((res:any)=>{
+      this.categoryList = res.data;
+    })
+  }
 
   getAllCategory() {
     this.productSrv.getCategory().subscribe((res:any)=>{
       this.categoryList = res.data;
     })
+  }
+
+  onUpdate() {
+    this.productSrv.updateProduct(this.productObj).subscribe((res:any) => {
+      if (res.result) {
+        alert("Product Updated");
+        this.getProducts();
+      } else {
+        alert(res.message)
+      }
+    })
+  }
+
+  onSave(){
+    this.productSrv.saveProduct(this.productObj).subscribe((res:any) => {
+      if (res.result) {
+        alert("Product Created");
+        this.getProducts();
+      } else {
+        alert(res.message)
+      }
+    })
+  }
+
+  onEdit(item: any){
+    this.productObj = item;
+    this.openSidePanel();
   }
 
 

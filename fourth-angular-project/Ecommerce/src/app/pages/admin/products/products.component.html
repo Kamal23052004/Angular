@@ -10,39 +10,21 @@
                         <button class="btn btn-sm btn-success" (click)="openSidePanel()">New</button>
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-3" *ngFor="let product of productsList">
                         <div class="card">
-                            <img class="card-img-top" src="img_avatar1.png" alt="Card image">
+                            <img class="card-img-top" [src]="product.productImageUrl" alt="Card image">
                             <div class="card-body">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text">Some example text.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                                <h4 class="card-title">{{product.productName}}</h4>
+                                <p class="card-text">{{product.categoryName}}</p>
+                                <a class="btn btn-primary" (click)="onEdit(product)">Edit</a>
+                                <a class="btn btn-danger mx-2" (click)="onDelete(product)">Delete</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="card">
-                            <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text">Some example text.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card">
-                            <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text">Some example text.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -104,5 +86,17 @@
                             <textarea rows="4" class="form-control" [(ngModel)]="productObj.productDescription"></textarea>
                         </div>
                     </div>
+                    <div class="row pt-2">
+                        <div class="col-6 text-center">
+                            <button class="btn btn-success">Reset</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button class="btn btn-success" *ngIf="productObj.productId == 0" (click)="onSave()">Create Product</button>
+                            <button class="btn btn-primary" *ngIf="productObj.productId !== 0" (click)="onUpdate()">Update Product</button>
+                        </div>
+                        </div>
                 </div>  
+            </div>
+        </div>
+    </div>  
            
