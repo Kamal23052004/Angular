@@ -14,7 +14,7 @@ export class ProductsComponent implements OnInit {
   isSidePanelVisible: boolean= false;
   productObj: any ={
     "productId": 0,
-    "productSku": "",
+    "productSku": "",  
     "productName": "",
     "productPrice": 0,
     "productShortName": "",
@@ -67,6 +67,21 @@ export class ProductsComponent implements OnInit {
         alert(res.message)
       }
     })
+  }
+
+  onDelete(item:any) {
+    const isDelete = confirm('Are you sure want to delete');
+    if (isDelete) {
+      this.productSrv.deleteProduct(item.productId).subscribe((res:any) => {
+        debugger;
+        if (res.result) {
+          alert("Product Deleted");
+          this.getProducts();
+        } else {
+          alert(res.message)
+        }
+      })
+    }
   }
 
   onEdit(item: any){
