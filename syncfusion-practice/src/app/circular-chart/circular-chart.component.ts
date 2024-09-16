@@ -43,8 +43,8 @@ export class CircularChartComponent {
     { country: 'USA', medals: 32 },
     { country: 'Australia', medals: 21 },
     { country: 'Saudi', medals: 31 },
-    { country: 'ytueg', medals: 89 },
-    { country: 'ygughef', medals: 90 },
+    { country: 'Germany', medals: 89 },
+    { country: 'Russia', medals: 90 },
   ]
 
 }

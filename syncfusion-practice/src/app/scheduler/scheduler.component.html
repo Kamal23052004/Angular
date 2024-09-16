@@ -1,0 +1,11 @@
+<ejs-schedule width='100%' cssClass='virtual-scrolling' height='700px' [group]="group" [selectedDate]="selectedDate" [eventSettings]="eventSettings">
+    <e-resources>
+      <e-resource field='ResourceId' title='Resource' [dataSource]='resourceDataSource' [allowMultiple]='allowMultiple'
+        name='Resources' textField='Text' idField='Id' colorField='Color'>
+      </e-resource>
+    </e-resources>
+    <e-views>
+      <e-view option="TimelineMonth" [allowVirtualScrolling]="virtualscroll" isSelected=true></e-view>
+      <e-view option="TimelineYear" [allowVirtualScrolling]="virtualscroll" orientation="Vertical"></e-view>
+    </e-views>
+  </ejs-schedule>
