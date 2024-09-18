@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ScheduleModule } from '@syncfusion/ej2-angular-schedule'
+import { Component, ViewChild } from '@angular/core';
+import { ScheduleComponent, ScheduleModule } from '@syncfusion/ej2-angular-schedule'
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons'
 import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule'
 import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupModel } from '@syncfusion/ej2-angular-schedule';
@@ -25,6 +25,16 @@ import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupMod
   styleUrl: './scheduler.component.css'
 })
 export class SchedulerComponent {
+  @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
+
+  public onDataBound(): void {
+    // Set custom cell height and width after data is bound
+    const workCells = this.scheduleObj.element.querySelectorAll('.e-work-cells') as NodeListOf<HTMLElement>;
+    workCells.forEach((cell) => {
+      cell.style.height = '10px';
+      cell.style.width = '10px';
+    });
+  }
   public selectedDate: Date = new Date(2018, 4, 1);
   public group: GroupModel = { byGroupID: false, resources: ['Resources'] };
   public allowMultiple: boolean = true;
