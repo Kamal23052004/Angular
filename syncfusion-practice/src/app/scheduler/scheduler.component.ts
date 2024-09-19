@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, ScheduleModule } from '@syncfusion/ej2-angular-schedule'
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons'
 import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule'
@@ -22,19 +22,47 @@ import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupMod
     MonthAgendaService,
     TimelineMonthService, TimelineYearService],
   templateUrl: './scheduler.component.html',
-  styleUrl: './scheduler.component.css'
+  styleUrl: './scheduler.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class SchedulerComponent {
+  // @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
+
+  // public onDataBound(): void {
+  //   // Set custom cell height and width after data is bound
+  //   const workCells = this.scheduleObj.element.querySelectorAll('.e-work-cells') as NodeListOf<HTMLElement>;
+  //   workCells.forEach((cell) => {
+  //     cell.style.height = '1px';
+  //     cell.style.width = '1px';
+  //   });
+  // }
+
+  // public onDataBound(): void {
+  //   const cells = document.querySelectorAll('.e-work-cells, .e-header-cells, .e-all-day-cells') as NodeListOf<HTMLElement>;
+  //   cells.forEach((cell) => {
+  //     cell.style.height = '1px'; // Adjust cell height here
+  //     cell.style.width = '1px';  // Adjust cell width here
+  //   });
+  // }
+  // public scheduleOptions: Object = {
+  //   rowAutoHeight: false
+  // };
+
   @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
+  // Event triggered after the data is loaded and Scheduler is rendered
   public onDataBound(): void {
-    // Set custom cell height and width after data is bound
-    const workCells = this.scheduleObj.element.querySelectorAll('.e-work-cells') as NodeListOf<HTMLElement>;
-    workCells.forEach((cell) => {
-      cell.style.height = '10px';
-      cell.style.width = '10px';
+    // Get all the work cells and adjust their size
+    const cells = this.scheduleObj.element.querySelectorAll('.e-work-cells, .e-header-cells, .e-all-day-cells') as NodeListOf<HTMLElement>;
+
+    cells.forEach(cell => {
+      cell.style.height = '30px';  // Set your desired height
+      cell.style.width = '30px';   // Set your desired width
     });
+
+    
   }
+
   public selectedDate: Date = new Date(2018, 4, 1);
   public group: GroupModel = { byGroupID: false, resources: ['Resources'] };
   public allowMultiple: boolean = true;

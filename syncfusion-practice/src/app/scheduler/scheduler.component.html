@@ -1,4 +1,4 @@
-<ejs-schedule width='100%' cssClass='virtual-scrolling' height='700px' [group]="group" [selectedDate]="selectedDate" [eventSettings]="eventSettings" #scheduleObj (dataBound)="onDataBound()">
+<ejs-schedule width='100px' cssClass='virtual-scrolling' height='700px' [group]="group" [selectedDate]="selectedDate" [eventSettings]="eventSettings" #scheduleObj [height]="800"[width]="2500"(dataBound)="onDataBound()">
     <e-resources>
       <e-resource field='ResourceId' title='Resource' [dataSource]='resourceDataSource' [allowMultiple]='allowMultiple'
         name='Resources' textField='Text' idField='Id' colorField='Color'>
