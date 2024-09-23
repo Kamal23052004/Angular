@@ -1,26 +1,107 @@
-/* Work Cells */
 .e-schedule .e-work-cells {
-    height: 30px !important;   /* Set cell height */
-    width: 87px !important;    /* Set cell width */
+    height: 30px !important;   
+    width: 87px !important;    
   }
   
-  /* All-Day Cells */
+
   .e-schedule .e-all-day-cells {
-    height: 30px !important;   /* Set cell height */
-    width: 87px !important;    /* Set cell width */
+    height: 30px !important;   
+    width: 87px !important;    
   }
   
-  /* Header Cells */
+
   .e-schedule .e-header-cells {
-    height: 30px !important;   /* Set cell height */
-    width: 87px !important;    /* Set cell width */
+    height: 30px !important;   
+    width: 87px !important;    
   }
   
-  /* Additional Overriding, if needed */
   .e-schedule .e-content-table {
     height: auto !important;
     width: auto !important;
   }
+
+
+
+
+
+
+
+
+  .e-schedule .e-resource-cells {
+    height: 30px !important;   
+    width: 200px !important;    
+    min-width: 100px !important; 
+  }
+  
+
+.e-schedule .e-resource-cells {
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis; 
+  height: 27px !important; 
+  width: 150px !important; 
+  min-width: 150px !important; 
+}
+
+
+.e-schedule .e-resource-column-wrap {
+  width: 150px !important;   
+  min-width: 200px !important; 
+}
+
+
+schedule .e-timeline-month-view .e-resource-cells {
+  background: #fafafa;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  color: rgba(0, 0, 0, 0.87);
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 0;
+  vertical-align: middle;
+}
+
+
+.e-schedule .e-work-cells,
+.e-schedule .e-all-day-cells {
+  height: 30px !important;
+  /*width: 50px !important;*/
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+.e-schedule .e-appointment {
+  height: auto !important;  
+  max-height: 26px !important;  
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;
+  margin-top: -2px;
+}
+
+
+.e-schedule .e-resource-cells {
+  min-height: 10px !important; 
+}
+
+
+.e-schedule .e-work-cells,
+.e-schedule .e-all-day-cells {
+  height: 27px !important;  
+}
+
+
+
 
 
 
