@@ -26,28 +26,7 @@ import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupMod
     ResizeService
   ],
   templateUrl: './scheduler.component.html',
-  styles: [`
-    .schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells-wrap table col,
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-date-header-wrap table col,
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-content-wrap table col {
-    width: calc(100% / 31) !important; 
-}
-
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-work-cells,
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-date-header-wrap table col,
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells-wrap table col {
-    width: calc(100% / 31) !important; 
-}
-
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells,
-.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-work-cells {
-    height: 2.6rem !important;
-}
-
-    
-
-`
-],
+  styleUrl: './scheduler.component.css',
   encapsulation: ViewEncapsulation.None
 })
 export class SchedulerComponent {
