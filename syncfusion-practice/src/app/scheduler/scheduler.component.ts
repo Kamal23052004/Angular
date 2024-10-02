@@ -2,7 +2,7 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, ScheduleModule } from '@syncfusion/ej2-angular-schedule'
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons'
 import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule'
-import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupModel } from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupModel, DragAndDropService, ResizeService } from '@syncfusion/ej2-angular-schedule';
 
 
 @Component({
@@ -20,67 +20,43 @@ import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupMod
     MonthService,
     AgendaService,
     MonthAgendaService,
-    TimelineMonthService, TimelineYearService],
+    TimelineMonthService, 
+    TimelineYearService,
+    DragAndDropService,
+    ResizeService
+  ],
   templateUrl: './scheduler.component.html',
-  styleUrl: './scheduler.component.css',
+  styles: [`
+    .schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells-wrap table col,
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-date-header-wrap table col,
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-content-wrap table col {
+    width: calc(100% / 31) !important; 
+}
+
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-work-cells,
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-date-header-wrap table col,
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells-wrap table col {
+    width: calc(100% / 31) !important; 
+}
+
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells,
+.schedule-cell-dimension.e-schedule .e-timeline-month-view .e-work-cells {
+    height: 2.6rem !important;
+}
+
+    
+
+`
+],
   encapsulation: ViewEncapsulation.None
 })
 export class SchedulerComponent {
-  // @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
-  // public onDataBound(): void {
-  //   // Set custom cell height and width after data is bound
-  //   const workCells = this.scheduleObj.element.querySelectorAll('.e-work-cells') as NodeListOf<HTMLElement>;
-  //   workCells.forEach((cell) => {
-  //     cell.style.height = '1px';
-  //     cell.style.width = '1px';
-  //   });
-  // }
 
-  // public onDataBound(): void {
-  //   const cells = document.querySelectorAll('.e-work-cells, .e-header-cells, .e-all-day-cells') as NodeListOf<HTMLElement>;
-  //   cells.forEach((cell) => {
-  //     cell.style.height = '1px'; // Adjust cell height here
-  //     cell.style.width = '1px';  // Adjust cell width here
-  //   });
-  // }
-  // public scheduleOptions: Object = {
-  //   rowAutoHeight: false
-  // };
 
-  @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
-  // public eventSettings: Object = {
-  //   enableMaxHeight: false,  // Ensure all events are shown without height restriction
-  //   enableIndicator: false   // Disable the "+1 more" indicator
-  // };
-
-  // Event triggered after the data is loaded and Scheduler is rendered
-  public onDataBound(): void {
-    // Get all the work cells and adjust their size
-    const cells = this.scheduleObj.element.querySelectorAll('.e-work-cells, .e-header-cells, .e-all-day-cells') as NodeListOf<HTMLElement>;
-    const resourceCells = this.scheduleObj.element.querySelectorAll('.e-resource-cells') as NodeListOf<HTMLElement>;
-    const resourceColumnWrap = this.scheduleObj.element.querySelector('.e-resource-column-wrap') as HTMLElement;
-
-    cells.forEach(cell => {
-      cell.style.height = '30px';  // Set your desired height
-      cell.style.width = '30px';   // Set your desired width
-    });
-
-    resourceCells.forEach(resourceCell => {
-      resourceCell.style.height = '30px';  // Set the resource cell height
-      resourceCell.style.width = '100px';  // Set a wider width for the resource cells
-    });
-
-    // Adjust the resource column wrapper to avoid it from collapsing
-    if (resourceColumnWrap) {
-      resourceColumnWrap.style.width = '100px';  // Set a wider width for the entire resource column
-      resourceColumnWrap.style.minWidth = '100px'; 
-    }
-
-    
-  }
-
+    @ViewChild('scheduleObj', { static: true })
+    public scheduleObj?: ScheduleComponent;
   public selectedDate: Date = new Date(2018, 4, 1);
   public group: GroupModel = { byGroupID: false, resources: ['Resources'] };
   public allowMultiple: boolean = true;
