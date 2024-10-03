@@ -12,5 +12,20 @@
 
 .schedule-cell-dimension.e-schedule .e-timeline-month-view .e-resource-cells,
 .schedule-cell-dimension.e-schedule .e-timeline-month-view .e-work-cells {
-    height: 2.6rem !important;
+    height: 2rem !important;
+}
+
+.e-schedule .e-timeline-month-view .e-appointment {
+    height: 29px;
+    margin-top: -1px;
+}
+
+.e-schedule .e-timeline-month-view .e-appointment .e-subject {
+    font-size: 11px;
+    padding-top: 2px;
+}
+
+.e-schedule .e-timeline-month-view .e-appointment .e-time, .e-schedule .e-timeline-month-view .e-appointment .e-location {
+    font-size: 10px;
+    margin-top: -5px;
 }
