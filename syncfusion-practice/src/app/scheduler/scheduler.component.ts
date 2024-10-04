@@ -1,6 +1,9 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ScheduleComponent, ScheduleModule } from '@syncfusion/ej2-angular-schedule'
+import { ScheduleComponent, ScheduleModule, ToolbarActionArgs } from '@syncfusion/ej2-angular-schedule'
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons'
+import { createElement } from '@syncfusion/ej2-base';
+import { ItemModel } from '@syncfusion/ej2-navigations';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule'
 import { EventSettingsModel, TimelineMonthService, TimelineYearService, GroupModel, DragAndDropService, ResizeService } from '@syncfusion/ej2-angular-schedule';
 
@@ -34,14 +37,69 @@ export class SchedulerComponent {
 
 
 
-    @ViewChild('scheduleObj', { static: true })
-    public scheduleObj?: ScheduleComponent;
+  @ViewChild('scheduleObj', { static: true })
+  public scheduleObj?: ScheduleComponent;
   public selectedDate: Date = new Date(2018, 4, 1);
+  public currentView: string = 'TimelineMonth';
   public group: GroupModel = { byGroupID: false, resources: ['Resources'] };
   public allowMultiple: boolean = true;
   public resourceDataSource: Object[] = this.generateResourceData(1, 300, 'Resource');
   public eventSettings: EventSettingsModel = { dataSource: this.generateStaticEvents(new Date(2018, 4, 1), 300, 12) , enableMaxHeight: false, enableIndicator: false };
   public virtualscroll: boolean = true;
+
+
+
+
+
+
+
+  public viewOptions = [
+    { text: 'Today', value: 'today' },
+    { text: 'Week', value: 'Week' },
+    { text: 'Month', value: 'TimelineMonth' },
+    { text: 'Year', value: 'TimelineYear' },
+  ];
+
+  public onActionBegin(args: ToolbarActionArgs): void {
+    if (args.requestType === 'toolbarItemRendering') {
+      const dropdownEle = createElement('input', { id: 'viewSelector' });
+      (args.items as ItemModel[]).push({
+        align: 'Right',
+        template: dropdownEle.outerHTML,
+        cssClass: 'e-custom-dropdown',
+      });
+    }
+  }
+
+
+  public onActionComplete(args: any): void {
+    if (args.requestType === 'toolBarItemRendered') {
+      const dropdown = new DropDownList({
+        dataSource: this.viewOptions,
+        fields: { text: 'text', value: 'value' },
+        placeholder: 'Select View',
+        value: this.currentView,
+        change: (e: any) => this.onViewChange(e),
+      });
+      dropdown.appendTo('#viewSelector');
+    }
+  }
+
+
+  public onViewChange(event: any): void {
+    const viewValue = event.itemData.value;
+    if (viewValue === 'today') {
+      this.scheduleObj!.selectedDate = new Date();
+    } else {
+      this.scheduleObj?.changeView(viewValue);
+    }
+  }
+
+
+
+
+
+
   private generateStaticEvents(start: Date, resCount: number, overlapCount: number): Object[] {
     let data: Object[] = [];
     let id: number = 1;
@@ -91,5 +149,8 @@ export class SchedulerComponent {
     }
     return data;
   }
+
+
+  
 
 }
