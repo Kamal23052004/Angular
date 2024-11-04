@@ -29,3 +29,40 @@
     font-size: 10px;
     margin-top: -5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.e-schedule .e-timeline-view .e-appointment, .e-schedule .e-timeline-month-view .e-appointment {
+    transform: skew(-15deg);
+    position: relative; /* Ensure it's relative */
+    width: calc(200% + 2px); /* Span across two cells */
+    margin-left: -50%; /* Shift it back to be centered between two cells */
+    height: 29px; /* Adjust height if needed */
+}
+
+.e-schedule .e-appointment .e-right-handler {
+    display: block; /* Only the right handler will be visible */
+}
+
+
+/* Ensure the resizing handle only works on the right side */
+.e-schedule .e-appointment .e-right-handler {
+    display: block; /* Only the right handler will be visible */
+}
+
+.e-schedule .e-appointment .e-left-handler {
+    display: none; /* Hide the left resize handle */
+}
